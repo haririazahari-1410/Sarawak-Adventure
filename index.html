@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sarawak Tour Package Booking</title>
+
+    <!-- jQuery Mobile -->
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #00695c, #26a69a);
+            color: white;
+            padding: 35px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            margin: 5px 0;
+            font-size: 30px;
+        }
+
+        .hero p {
+            margin: 8px 0 0;
+        }
+
+        .package-card {
+            border-radius: 12px;
+            margin: 15px 0;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, .15);
+            background: white;
+        }
+
+        .package-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .package-content {
+            padding: 15px;
+        }
+
+        .price {
+            color: #00796b;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 25px 0 10px;
+        }
+
+        .success {
+            display: none;
+            padding: 12px;
+            background: #dff0d8;
+            color: #2e6b2e;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .error {
+            color: #d32f2f;
+            font-size: 13px;
+            margin: 4px 0 8px;
+        }
+
+        .required {
+            color: red;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #263238;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HOME -->
+    <div data-role="page" id="home">
+
+        <div data-role="header" data-theme="b">
+            <h1>Room SawaKu</h1>
+            <a href="#contact" data-rel="popup" class="ui-btn ui-btn-right ui-corner-all">
+                Contact
+            </a>
+        </div>
+
+        <div data-role="main" class="ui-content">
+
+            <div class="hero">
+                <h1>Explore Sarawak</h1>
+                <p>Discover amazing places, activities and cultures.</p>
+                <a href="#packages" class="ui-btn ui-btn-inline ui-corner-all" data-transition="slide">
+                    View Tour Packages
+                </a>
+            </div>
+
+            <h2 class="section-title">Why Choose Us?</h2>
+
+            <div data-role="collapsible" data-theme="a">
+                <h3>Easy Booking</h3>
+                <p>Book your Sarawak holiday package using your browser or mobile device.</p>
+            </div>
+
+            <div data-role="collapsible">
+                <h3>Interesting Destinations</h3>
+                <p>Explore Kuching, Bako, Mulu and other popular Sarawak destinations.</p>
+            </div>
+
+            <div data-role="collapsible">
+                <h3>Mobile Friendly</h3>
+                <p>The interface is designed using jQuery Mobile for responsive mobile navigation.</p>
+            </div>
+
+        </div>
+
+        <!-- Contact Modal -->
+        <div data-role="popup" id="contact" data-overlay-theme="b" data-theme="a" data-dismissible="true"
+            class="ui-corner-all" style="max-width:500px;">
+
+            <div data-role="header" data-theme="b">
+                <h2>Contact Us</h2>
+            </div>
+
+            <div class="ui-content">
+
+                <form id="contactForm" onsubmit="return validateContactForm()">
+
+                    <label for="contactName">Name <span class="required">*</span></label>
+                    <input type="text" id="contactName" placeholder="Enter your name">
+                    <div id="nameError" class="error"></div>
+
+                    <label for="contactEmail">Email <span class="required">*</span></label>
+                    <input type="email" id="contactEmail" placeholder="example@email.com">
+                    <div id="emailError" class="error"></div>
+
+                    <label for="contactMessage">Message <span class="required">*</span></label>
+                    <textarea id="contactMessage" placeholder="Enter your message"></textarea>
+                    <div id="messageError" class="error"></div>
+
+                    <!-- Ethical Consent -->
+                    <label>
+                        <input type="checkbox" id="consent">
+                        I agree that my information may be used to respond to my enquiry.
+                        <span class="required">*</span>
+                    </label>
+                    <div id="consentError" class="error"></div>
+
+                    <button type="submit" class="ui-btn ui-btn-b ui-corner-all">
+                        Submit
+                    </button>
+
+                    <div id="contactSuccess" class="success">
+                        Thank you! Your message has been submitted successfully.
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- TOUR PACKAGES -->
+    <div data-role="page" id="packages">
+
+        <div data-role="header" data-theme="b">
+            <a href="#home" data-transition="slide" data-direction="reverse">Home</a>
+            <h1>Tour Packages</h1>
+            <a href="#booking" data-transition="slide">Book</a>
+        </div>
+
+        <div data-role="main" class="ui-content">
+
+            <div class="package-card">
+                <img src="img/kl.jpg"
+                    alt="Sarawak rainforest">
+
+                <div class="package-content">
+                    <h2>Bako National Park</h2>
+
+                    <!-- Tooltip -->
+                    <p>
+                        <strong>Duration:</strong>
+                        <span title="3 Days 2 Nights">3 Days 2 Nights</span>
+                    </p>
+
+                    <p class="price">RM 450 / person</p>
+
+                    <!-- Popover -->
+                    <a href="#bakoInfo" data-rel="popup" data-position-to="window" class="ui-btn ui-btn-inline ui-mini">
+                        Package Details
+                    </a>
+
+                    <a href="#booking" data-transition="slide" class="ui-btn ui-btn-b ui-corner-all">
+                        Book Now
+                    </a>
+                </div>
+            </div>
+
+            <div data-role="popup" id="bakoInfo" class="ui-content" data-theme="a" style="max-width:350px;">
+                <h3>Bako Package</h3>
+                <p>
+                    Destination: Bako National Park<br>
+                    Activities: Hiking, wildlife viewing and beach visit<br>
+                    Facilities: Transport, guide and accommodation
+                </p>
+            </div>
+
+
+            <div class="package-card">
+                <img src="img/kuch.jpg"
+                    alt="Rainforest destination">
+
+                <div class="package-content">
+                    <h2>Mulu Adventure</h2>
+
+                    <p>
+                        <strong>Duration:</strong>
+                        <span title="4 Days 3 Nights">4 Days 3 Nights</span>
+                    </p>
+
+                    <p class="price">RM 750 / person</p>
+
+                    <a href="#muluInfo" data-rel="popup" data-position-to="window" class="ui-btn ui-btn-inline ui-mini">
+                        Package Details
+                    </a>
+
+                    <a href="#booking" data-transition="slide" class="ui-btn ui-btn-b ui-corner-all">
+                        Book Now
+                    </a>
+                </div>
+            </div>
+
+            <div data-role="popup" id="muluInfo" class="ui-content" data-theme="a" style="max-width:350px;">
+                <h3>Mulu Adventure</h3>
+                <p>
+                    Destination: Mulu National Park<br>
+                    Activities: Cave exploration, hiking and sightseeing<br>
+                    Facilities: Transport, guide and accommodation
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- BOOKING -->
+    <div data-role="page" id="booking">
+
+        <div data-role="header" data-theme="b">
+            <a href="#packages" data-transition="slide" data-direction="reverse">
+                Back
+            </a>
+            <h1>Booking</h1>
+        </div>
+
+        <div data-role="main" class="ui-content">
+
+            <h2>Tour Package Booking Form</h2>
+
+            <form id="bookingForm" onsubmit="return submitBooking()">
+
+                <label for="bookingName">Full Name *</label>
+                <input type="text" id="bookingName">
+
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" placeholder="0123456789">
+
+                <label for="email">Email *</label>
+                <input type="email" id="email">
+
+                <label for="travelDate">Travel Date *</label>
+                <input type="date" id="travelDate">
+
+                <label for="participants">Number of Participants *</label>
+                <input type="number" id="participants" min="1" value="1">
+
+                <label for="package">Tour Package *</label>
+                <select id="package">
+                    <option value="">-- Select Package --</option>
+                    <option value="Bako National Park">Bako National Park - RM450</option>
+                    <option value="Mulu Adventure">Mulu Adventure - RM750</option>
+                </select>
+
+                <label>
+                    <input type="checkbox" id="bookingConsent">
+                    I agree to the privacy and responsible-use terms. *
+                </label>
+
+                <div id="bookingError" class="error"></div>
+
+                <button type="submit" class="ui-btn ui-btn-b">
+                    Confirm Booking
+                </button>
+
+            </form>
+
+            <div id="bookingSuccess" class="success">
+                Booking information submitted successfully!
+            </div>
+
+        </div>
+    </div>
+
+
+    <footer>
+        Sarawak Tour Package Booking System © 2026
+    </footer>
+
+
+    <script>
+        /* ==========================================================
+           USER-DEFINED JAVASCRIPT VALIDATION
+           ========================================================== */
+
+        function validateContactForm() {
+
+            // Get values
+            var name = document.getElementById("contactName").value.trim();
+            var email = document.getElementById("contactEmail").value.trim();
+            var message = document.getElementById("contactMessage").value.trim();
+            var consent = document.getElementById("consent").checked;
+
+            // Clear previous errors
+            document.getElementById("nameError").innerHTML = "";
+            document.getElementById("emailError").innerHTML = "";
+            document.getElementById("messageError").innerHTML = "";
+            document.getElementById("consentError").innerHTML = "";
+
+            var valid = true;
+
+            // Name validation
+            if (name === "") {
+                document.getElementById("nameError").innerHTML =
+                    "Please enter your name.";
+                valid = false;
+            }
+
+            // Email validation
+            var emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/i;
+
+            if (email === "") {
+                document.getElementById("emailError").innerHTML =
+                    "Please enter your email.";
+                valid = false;
+            } else if (!emailPattern.test(email)) {
+                document.getElementById("emailError").innerHTML =
+                    "Please enter a valid email address.";
+                valid = false;
+            }
+
+            // Message validation
+            if (message === "") {
+                document.getElementById("messageError").innerHTML =
+                    "Please enter your message.";
+                valid = false;
+            }
+
+            // Ethical consent validation
+            if (!consent) {
+                document.getElementById("consentError").innerHTML =
+                    "You must provide consent before submitting the form.";
+                valid = false;
+            }
+
+            if (valid) {
+                document.getElementById("contactSuccess").style.display = "block";
+                return false; // Demo only - prevents actual server submission
+            }
+
+            return false;
+        }
+
+
+        /* Booking validation */
+        function submitBooking() {
+
+            var name = document.getElementById("bookingName").value.trim();
+            var phone = document.getElementById("phone").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var date = document.getElementById("travelDate").value;
+            var participants = document.getElementById("participants").value;
+            var tourPackage = document.getElementById("package").value;
+            var consent = document.getElementById("bookingConsent").checked;
+
+            var error = document.getElementById("bookingError");
+
+            error.innerHTML = "";
+
+            if (
+                name === "" ||
+                phone === "" ||
+                email === "" ||
+                date === "" ||
+                participants === "" ||
+                tourPackage === ""
+            ) {
+                error.innerHTML = "Please complete all required fields.";
+                return false;
+            }
+
+            if (!consent) {
+                error.innerHTML =
+                    "Please agree to the privacy and responsible-use terms.";
+                return false;
+            }
+
+            document.getElementById("bookingSuccess").style.display = "block";
+
+            return false; // Demo only
+        }
+    </script>
+
+</body>
+
+</html>
